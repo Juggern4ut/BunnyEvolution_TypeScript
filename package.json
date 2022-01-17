@@ -1,0 +1,22 @@
+{
+  "name": "bunny-evolution-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "develop": "concurrently \"npm run scss\" \"tsc --watch\" \"npm run webpack\" \"pug -w ./src/ -o ./dist/\" \"live-server ./dist/\"",
+    "scss": "node-sass ./src/scss/ -o ./dist/css/",
+    "pug": "pug -w ./src/ -o ./dist/",
+    "webpack": "webpack --mode development ./src/js/main.js -o ./dist/js/ --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^7.0.1",
+    "pug-cli": "^1.0.0-alpha6",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {}
+}
