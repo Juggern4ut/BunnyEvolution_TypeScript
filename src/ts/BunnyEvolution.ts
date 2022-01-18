@@ -13,17 +13,19 @@ export default class BunnyEvolution {
 
     for (let i = 0; i < 10; i++)
       this.addBunny(
-        Math.random() * this.canvas.width,
-        Math.random() * this.canvas.height
+        (Math.random() * this.canvas.width) | 0,
+        (Math.random() * this.canvas.height) | 0
       );
 
     for (let i = 0; i < 10; i++)
       this.addPlant(
-        Math.random() * this.canvas.width,
-        Math.random() * this.canvas.height
+        (Math.random() * this.canvas.width) | 0,
+        (Math.random() * this.canvas.height) | 0
       );
 
-    this.draw();
+    setInterval(() => {
+      this.draw();
+    }, 1000 / 20);
   }
 
   /**
@@ -32,7 +34,7 @@ export default class BunnyEvolution {
    * @param y Y-Coordinate of the Bunny
    */
   addBunny(x: number, y: number) {
-    this.bunnies.push(new Bunny(this.context, { x, y }));
+    this.bunnies.push(new Bunny(this.context, x, y));
   }
 
   /**
@@ -41,7 +43,7 @@ export default class BunnyEvolution {
    * @param y Y-Coordinate of the Plant
    */
   addPlant(x: number, y: number) {
-    this.plants.push(new Plant(this.context, { x, y }));
+    this.plants.push(new Plant(this.context, x, y));
   }
 
   /**
@@ -49,7 +51,12 @@ export default class BunnyEvolution {
    */
   draw() {
     this.clear();
-    this.bunnies.forEach((b) => b.draw());
+
+    this.bunnies.forEach((b) => {
+      b.update();
+      b.draw();
+    });
+
     this.plants.forEach((p) => p.draw());
   }
 

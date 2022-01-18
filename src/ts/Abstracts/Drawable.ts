@@ -1,25 +1,18 @@
-import DrawableOptions from "../interfaces/DrawableOptions";
-
 export default class Drawable {
   x: number;
   y: number;
-  width: number;
-  height: number;
-  color: string;
+  width: number = 10;
+  height: number = 10;
+  color: string = "#000000";
   context: CanvasRenderingContext2D;
 
-  constructor(context: CanvasRenderingContext2D, options: DrawableOptions) {
-    this.x = options.x ?? 0;
-    this.y = options.y ?? 0;
-    this.width = options.width ?? 10;
-    this.height = options.height ?? 10;
-    this.color = options.color ?? "#000000";
+  constructor(context: CanvasRenderingContext2D, x: number, y: number) {
+    this.x = x;
+    this.y = y;
     this.context = context;
   }
 
   draw() {
-    console.log(this.color);
-    
     this.context.fillStyle = this.color;
     this.context.fillRect(this.x, this.y, this.width, this.height);
   }

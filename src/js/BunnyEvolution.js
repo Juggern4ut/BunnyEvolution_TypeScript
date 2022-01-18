@@ -12,10 +12,12 @@ class BunnyEvolution {
         this.canvas = document.querySelector(selector);
         this.context = this.canvas.getContext("2d");
         for (let i = 0; i < 10; i++)
-            this.addBunny(Math.random() * this.canvas.width, Math.random() * this.canvas.height);
+            this.addBunny((Math.random() * this.canvas.width) | 0, (Math.random() * this.canvas.height) | 0);
         for (let i = 0; i < 10; i++)
-            this.addPlant(Math.random() * this.canvas.width, Math.random() * this.canvas.height);
-        this.draw();
+            this.addPlant((Math.random() * this.canvas.width) | 0, (Math.random() * this.canvas.height) | 0);
+        setInterval(() => {
+            this.draw();
+        }, 1000 / 20);
     }
     /**
      * Adds a new Bunny to the simulation
@@ -23,7 +25,7 @@ class BunnyEvolution {
      * @param y Y-Coordinate of the Bunny
      */
     addBunny(x, y) {
-        this.bunnies.push(new Bunny_1.default(this.context, { x, y }));
+        this.bunnies.push(new Bunny_1.default(this.context, x, y));
     }
     /**
      * Adds a new Plant to the simulation
@@ -31,14 +33,17 @@ class BunnyEvolution {
      * @param y Y-Coordinate of the Plant
      */
     addPlant(x, y) {
-        this.plants.push(new Plant_1.default(this.context, { x, y }));
+        this.plants.push(new Plant_1.default(this.context, x, y));
     }
     /**
      * Clears the context and draws each entity
      */
     draw() {
         this.clear();
-        this.bunnies.forEach((b) => b.draw());
+        this.bunnies.forEach((b) => {
+            b.update();
+            b.draw();
+        });
         this.plants.forEach((p) => p.draw());
     }
     /**

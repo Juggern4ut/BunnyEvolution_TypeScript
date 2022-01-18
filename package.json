@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "develop": "concurrently \"npm run scss\" \"tsc --watch\" \"npm run webpack\" \"pug -w ./src/ -o ./dist/\" \"live-server ./dist/\"",
-    "scss": "node-sass ./src/scss/ -o ./dist/css/",
+    "scss": "node-sass ./src/scss/ -o ./dist/css/ --watch",
     "pug": "pug -w ./src/ -o ./dist/",
     "webpack": "webpack --mode development ./src/js/main.js -o ./dist/js/ --watch"
   },

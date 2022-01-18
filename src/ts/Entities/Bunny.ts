@@ -1,9 +1,9 @@
 import Movable from "../Abstracts/Movable";
-import DrawableOptions from "../interfaces/DrawableOptions";
 
 export default class Bunny extends Movable {
-  constructor(context: CanvasRenderingContext2D, options: DrawableOptions) {
-    super(context, options);
+  constructor(context: CanvasRenderingContext2D, x: number = 0, y: number = 0) {
+    super(context, x, y);
+    this.speed = 1;
     this.color = "#F00";
   }
 }
